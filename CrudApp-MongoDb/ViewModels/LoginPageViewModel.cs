@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Maui.Storage;
 using Realms.Sync;
 using System;
 using System.Collections.Generic;
@@ -13,8 +14,8 @@ namespace CrudApp_MongoDb.ViewModels
     {
         public LoginPageViewModel()
         {
-            EmailText = "test@test.com";
-            PasswordText = "testtest";
+            //EmailText = "by@gmail.com";
+            //PasswordText = "1234";
         }
 
         [ObservableProperty]
@@ -54,25 +55,19 @@ namespace CrudApp_MongoDb.ViewModels
 
                 if (user != null)
                 {
+                    Preferences.Set("Email", EmailText);
+                    Preferences.Set("Password", PasswordText);
                     await Shell.Current.GoToAsync("///Main");
-                    EmailText = "";
-                    PasswordText = "";
                 }
                 else
                 {
                     throw new Exception();
                 }
-
             }
             catch (Exception ex)
             {
                 await Application.Current.MainPage.DisplayAlert("Error Logging In", ex.Message, "OK");
             }
-
         }
-
-
-
-
     }
 }
