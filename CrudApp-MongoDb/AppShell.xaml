@@ -26,7 +26,5 @@
         Title="Main Page"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="Main" />
-    
-    
 
 </Shell>

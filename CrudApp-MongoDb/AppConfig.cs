@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace CrudApp_MongoDb
 {
-    public class AppConfig
+    public static class AppConfig
     {
-        public const string RealmAppId = "application-0-citaw";
+        public const string RealmAppId = "application-0-wnwnz";
     }
 }

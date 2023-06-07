@@ -4,7 +4,6 @@
              x:Class="CrudApp_MongoDb.Views.LoginPage"
              xmlns:vm="clr-namespace:CrudApp_MongoDb.ViewModels"
              x:DataType="vm:LoginPageViewModel"
-             Title="LoginPage"
              Shell.NavBarIsVisible="False">
     <ScrollView>
         <VerticalStackLayout VerticalOptions="Center" Margin="20,0" Spacing="10">

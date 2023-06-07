@@ -1,12 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Storage;
-using Realms.Sync;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Realms.Sync;
 
 namespace CrudApp_MongoDb.ViewModels
 {
@@ -17,6 +17,7 @@ namespace CrudApp_MongoDb.ViewModels
             //EmailText = "by@gmail.com";
             //PasswordText = "1234";
         }
+
 
         [ObservableProperty]
         string emailText;
@@ -55,9 +56,9 @@ namespace CrudApp_MongoDb.ViewModels
 
                 if (user != null)
                 {
-                    Preferences.Set("Email", EmailText);
-                    Preferences.Set("Password", PasswordText);
                     await Shell.Current.GoToAsync("///Main");
+                    EmailText = "";
+                    PasswordText = "";
                 }
                 else
                 {

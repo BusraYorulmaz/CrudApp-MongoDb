@@ -1,72 +1,120 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CrudApp_MongoDb.Views.MainPage"
-              xmlns:vm="clr-namespace:CrudApp_MongoDb.ViewModels"
+             xmlns:vm="clr-namespace:CrudApp_MongoDb.ViewModels"
              x:DataType="vm:MainPageViewModel"
+             xmlns:models="clr-namespace:CrudApp_MongoDb.Models"
+             xmlns:local ="clr-namespace:CrudApp_MongoDb.Views"
+             x:Name="mainb"
+             
+             x:Class="CrudApp_MongoDb.Views.MainPage"
              Title="MONGO DB APP">
-
-    <!--<VerticalStackLayout>
-
-        <HorizontalStackLayout Margin="10">
-            <Label Text="Your Mail: " FontSize="20" Margin="10,8" FontAttributes="Bold"/>
-            <Frame Padding="0">
-                <Entry FontSize="18" Margin="10,0"
-                       FontAttributes="Italic"
-                       Text="{Binding SavedEmail}"/>
-            </Frame>
-            <Button Text="" BackgroundColor="GreenYellow" Margin="5,0" HeightRequest="25" BorderWidth="2"/>
-            <Button Text="" BackgroundColor="Red" HeightRequest="25" BorderColor="Black" BorderWidth="2"/>
-
-        </HorizontalStackLayout>
-
-    </VerticalStackLayout>-->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Sign Out" Command="{Binding SignOutCommand}"/>
+    </ContentPage.ToolbarItems>
 
     <ScrollView>
-        <StackLayout BackgroundColor="GhostWhite">
+        <StackLayout BackgroundColor="LightGray">
             <Frame Margin="50" BorderColor="Transparent">
                 <VerticalStackLayout Spacing="10">
-                    <Image Source="dotnet_bot" HeightRequest="150"/>
+                    <Image Source="dotnet_bot" HeightRequest="70"/>
                     <HorizontalStackLayout Spacing="20">
-                        <Label Text="Name" Margin="0,10" />
-                        <Entry Text="Busra"/>
-                    </HorizontalStackLayout>
-                    <BoxView HeightRequest="1" Color="Gray" VerticalOptions="End" WidthRequest="{Binding Source={x:Reference entryName}, Path=Width}" />
-                    <HorizontalStackLayout Spacing="20">
-                        <Label Text="TC" Margin="0,10" />
-                        <Entry Text="1000000000"/>
-                        
+                        <Label Text="Name: " Margin="0,10" FontAttributes="Bold" />
+                        <Entry Text="{Binding UsersEntryText}" Placeholder="User Name"/>
                     </HorizontalStackLayout>
                     <BoxView HeightRequest="1" Color="Gray" VerticalOptions="End" WidthRequest="{Binding Source={x:Reference entryName}, Path=Width}" />
 
-                    <HorizontalStackLayout Spacing="20">
-                        <Label Text="Tel" Margin="0,10"/>
+                    <!--<HorizontalStackLayout Spacing="20">
+                        <Label Text="TC: " Margin="0,10" FontAttributes="Bold"/>
+                        <Entry Text="1000000000"/>
+
+                    </HorizontalStackLayout>
+                    <BoxView HeightRequest="1" Color="Gray" VerticalOptions="End" WidthRequest="{Binding Source={x:Reference entryName}, Path=Width}" />-->
+
+                    <!--<HorizontalStackLayout Spacing="20">
+                        <Label Text="Tel: " Margin="0,10" FontAttributes="Bold"/>
                         <Entry Text="0500 000 00 00"/>
                     </HorizontalStackLayout>
-                    <BoxView HeightRequest="1" Color="Gray" VerticalOptions="End"/>
+                    <BoxView HeightRequest="1" Color="Gray" VerticalOptions="End"/>-->
 
-                    <HorizontalStackLayout Spacing="20" HorizontalOptions="FillAndExpand">
-                        <Label Text="Mail" Margin="0,10" HorizontalOptions="StartAndExpand"/>
+                    <!--<HorizontalStackLayout Spacing="20"  HorizontalOptions="FillAndExpand">
+                        <Label Text="Mail: " Margin="0,10" FontAttributes="Bold" HorizontalOptions="StartAndExpand"/>
                         <Entry Text="by@gmail.com" HorizontalOptions="EndAndExpand"/>
                     </HorizontalStackLayout>
-                    <BoxView HeightRequest="1" Color="Gray" VerticalOptions="End"/>
+                    <BoxView HeightRequest="1" Color="Gray" VerticalOptions="End"/>-->
 
 
-                    <HorizontalStackLayout Spacing="20">
-                        <Label Text="Birth Day" Margin="0,10" />
+                    <!--<HorizontalStackLayout Spacing="20">
+                        <Label Text="Birth Day: " Margin="0,10" FontAttributes="Bold" />
                         <DatePicker/>
                     </HorizontalStackLayout>
-                    <BoxView HeightRequest="1" Color="Gray" VerticalOptions="End"/>
+                    <BoxView HeightRequest="1" Color="Gray" VerticalOptions="End"/>-->
 
-                    <HorizontalStackLayout Margin="0,20" HorizontalOptions="Center"> 
-                        <Button Text="GÜNCELLE" BackgroundColor="Green" Margin="5,0" BorderColor="Transparent"/>
-                        <Button Text="SİL" BackgroundColor="Red"   BorderColor="Transparent"/>
+                    <HorizontalStackLayout Margin="0,20" HorizontalOptions="Center">
+                        <Button Text="Ekle" Command="{Binding AddUserCommand}"
+                                IsEnabled="{Binding IsNotBusy}"
+                                BackgroundColor="Green" 
+                                Margin="5,0" BorderColor="Transparent"/>
+                        
                     </HorizontalStackLayout>
-
                 </VerticalStackLayout>
             </Frame>
+            <Label Margin="50,0" FontAttributes="Bold" Text="Kullanıcılar"/>
+            <VerticalStackLayout>
+                <RefreshView Command="{Binding GetUsersCommand}" IsRefreshing="{Binding IsRefreshing}">
+                    <CollectionView ItemsSource="{Binding UserList}">
+                        <CollectionView.EmptyView>
+                            <VerticalStackLayout>
+                                <Label Text="{Binding EmptyText}" FontSize="Medium"/>
+                            </VerticalStackLayout>
+                        </CollectionView.EmptyView>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:UserModel">
+                                
+                                <Frame Margin="50,2" BackgroundColor="White">
+                                    <Grid ColumnDefinitions="*,Auto,Auto">
+                                        <HorizontalStackLayout>
+                                            <!--<CheckBox IsChecked="{Binding Completed}">
+                                                <CheckBox.GestureRecognizers>
+                                                    <TapGestureRecognizer
+                                                        Command="{Binding Path=BindingContext.CheckUserCommand,Source={x:Reference Name=mainb
+                                                        }}"
+                                                        CommandParameter="{Binding .}"/>
+                                                </CheckBox.GestureRecognizers>
+                                            </CheckBox>-->
+                                            <Label LineBreakMode="WordWrap" Text="{Binding Name}"
+                                                   Grid.Column="1">
+                                                <Label.GestureRecognizers>
+                                                    <TapGestureRecognizer
+                                                        Command="{Binding Path=BindingContext.CheckUserCommand,Source={x:Reference Name=mainb
+                                                        }}"
+                                                        CommandParameter="{Binding .}"/>
+                                                </Label.GestureRecognizers>
+                                            </Label>
+                                        </HorizontalStackLayout>
+                                        <Button Grid.Column="1" Text="Edit"
+                                                BackgroundColor="Blue"
+                                                Margin="5,0"
+                                                IsEnabled="{Binding Path=BindingContext.IsNotBusy,Source={x:Reference Name=mainb}}"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainPageViewModel}},Path=EditUserCommand}"
+                                                CommandParameter="{Binding .}"/>
+                                        <Button Grid.Column="2" Text="Delete"
+                                                BackgroundColor="Red"
+                                                IsEnabled="{Binding Path=BindingContext.IsNotBusy,Source={x:Reference Name=mainb}}"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainPageViewModel}},Path=DeleteTaskCommand}"
+                                                CommandParameter="{Binding .}"/>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                    </CollectionView>
+                </RefreshView>
+            </VerticalStackLayout>
         </StackLayout>
-    </ScrollView> 
-    
-    
+
+    </ScrollView>
+
+
 </ContentPage>
