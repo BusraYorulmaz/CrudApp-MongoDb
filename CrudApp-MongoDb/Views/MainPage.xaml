@@ -24,7 +24,7 @@
                     </HorizontalStackLayout>
                     <BoxView HeightRequest="1" Color="Gray" VerticalOptions="End" WidthRequest="{Binding Source={x:Reference entryName}, Path=Width}" />
 
-                    <!--<HorizontalStackLayout Spacing="20">
+                    <!--<HorizontalStackLayout Spacing="20">.
                         <Label Text="TC: " Margin="0,10" FontAttributes="Bold"/>
                         <Entry Text="1000000000"/>
 
