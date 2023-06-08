@@ -51,7 +51,9 @@
                     <CollectionView ItemsSource="{Binding UserList}">
                         <CollectionView.EmptyView>
                             <VerticalStackLayout>
-                                <Label Text="{Binding EmptyText}" FontSize="Medium"/>
+                                <Frame Margin="50,20" BorderColor="Red" BackgroundColor="Transparent">
+                                    <Label Text="{Binding EmptyText}" FontSize="Medium"/>
+                                </Frame>
                             </VerticalStackLayout>
                         </CollectionView.EmptyView>
                         <CollectionView.ItemTemplate>
