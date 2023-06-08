@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CrudApp_MongoDb.Helpers;
 using CrudApp_MongoDb.Models;
+using CrudApp_MongoDb.Views;
 using Realms;
 using Realms.Sync;
 using System;
@@ -36,13 +37,22 @@ namespace CrudApp_MongoDb.ViewModels
         string usersEntryText;
 
         [ObservableProperty]
+        string surnameEntryText;
+
+        [ObservableProperty]
+        string telefonEntryText;
+
+        [ObservableProperty]
+        string mailEntryText;
+
+        [ObservableProperty]
         bool isRefreshing;
 
-
-
-
-
-
+        [RelayCommand]
+        async Task DetailUser(UserModel user)
+        {
+            await Application.Current.MainPage.Navigation.PushAsync(new UserDetail(user));
+        }
 
 
         [RelayCommand]
@@ -56,7 +66,10 @@ namespace CrudApp_MongoDb.ViewModels
                 var user =
                     new UserModel
                     {
+                        Surname = GeneralHelper.UppercaseFirst(SurnameEntryText),
                         Name = GeneralHelper.UppercaseFirst(UsersEntryText),
+                        Telefon = GeneralHelper.UppercaseFirst(TelefonEntryText),
+                        Mail = GeneralHelper.UppercaseFirst(MailEntryText),
                         Partition = App.RealmApp.CurrentUser.Id,
                         Owner = App.RealmApp.CurrentUser.Profile.Email
                     };
@@ -66,6 +79,10 @@ namespace CrudApp_MongoDb.ViewModels
                 });
 
                 UsersEntryText = "";
+                SurnameEntryText = "";
+                TelefonEntryText = "";
+                MailEntryText = "";
+
                 GetUsers();
             }
             catch (Exception ex)
@@ -83,23 +100,16 @@ namespace CrudApp_MongoDb.ViewModels
             try
             {
                 var currentuserId = App.RealmApp.CurrentUser.Id;
-
                 await App.RealmApp.RemoveUserAsync(App.RealmApp.CurrentUser);
-
                 var noMoreCurrentUser = App.RealmApp.AllUsers.FirstOrDefault(u => u.Id == currentuserId);
-
                 await Shell.Current.GoToAsync("///Login");
-
             }
             catch (Exception ex)
             {
                 await Application.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
-
             }
             IsBusy = false;
         }
-
-
 
 
 
@@ -126,33 +136,30 @@ namespace CrudApp_MongoDb.ViewModels
 
             try
             {
-                var tuser = realm.All<UserModel>().ToList().Reverse<UserModel>();// OrderBy(t => t.Completed);
+                var tuser = realm.All<UserModel>().ToList().Reverse<UserModel>();
                 UserList = new ObservableCollection<UserModel>(tuser);
             }
             catch (Exception ex)
             {
                 await Application.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
             }
-
             IsRefreshing = false;
             IsBusy = false;
-
         }
 
         [RelayCommand]
         public async void EditUser(UserModel user)
         {
             string newString = await App.Current.MainPage.DisplayPromptAsync("Edit", user.Name);
+            
 
             if (newString is null || string.IsNullOrWhiteSpace(newString.ToString()))
                 return;
             try
             {
-
                 realm.Write(() =>
                 {
                     var foundUser = realm.Find<UserModel>(user.Id);
-
                     foundUser.Name = GeneralHelper.UppercaseFirst(newString.ToString());
                 });
 
@@ -160,43 +167,8 @@ namespace CrudApp_MongoDb.ViewModels
             catch (Exception ex)
             {
                 await App.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
-
             }
         }
-
-
-
-        //[RelayCommand]
-        //public async void CheckUser(UserModel user)
-        //{
-        //    IsBusy = true;
-
-        //    try
-        //    {
-        //        realm.Write(() =>
-        //        {
-        //            var foundTodo = realm.Find<UserModel>(user.Id);
-
-        //            foundTodo.Completed = !foundTodo.Completed;
-        //        });
-
-        //        await Task.Delay(2);
-        //        var sortedlist = UserList.ToList().OrderBy(t => t.Completed);
-        //        UserList = new ObservableCollection<UserModel>(sortedlist);
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        await App.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
-
-        //    }
-        //    IsBusy = false;
-
-        //}
-
-
-
-
 
         [RelayCommand]
         async Task DeleteTask(UserModel user)
@@ -208,7 +180,6 @@ namespace CrudApp_MongoDb.ViewModels
                 {
                     realm.Remove(user);
                 });
-
                 UserList.Remove(user);
             }
             catch (Exception ex)
@@ -217,8 +188,6 @@ namespace CrudApp_MongoDb.ViewModels
             }
             IsBusy = false;
         }
-
-
 
     }
 }

@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace CrudApp_MongoDb.Models
 {
-    public class UserModel : RealmObject
+    public class Member: RealmObject
     {
+
         [PrimaryKey]
         [MapTo("_id")]
         public ObjectId Id { get; set; } = ObjectId.GenerateNewId();
@@ -20,18 +21,6 @@ namespace CrudApp_MongoDb.Models
         [MapTo("name")]
         [Required]
         public string Name { get; set; }
-
-        [MapTo("surname")]
-        [Required]
-        public string Surname { get; set; }
-
-        [MapTo("telefon")]
-        [Required]
-        public string Telefon { get; set; }
-
-        [MapTo("mail")]
-        [Required]
-        public string Mail { get; set; }
 
         [MapTo("_partition")]
         [Required]

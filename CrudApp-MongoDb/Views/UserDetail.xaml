@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CrudApp_MongoDb.Views.UserDetail"
+             Title="User Profile"
+             BackgroundColor="AliceBlue">
+    <VerticalStackLayout VerticalOptions="Start" Spacing="0" Margin="20,50">
+
+        <Frame CornerRadius="130" Padding="10" Margin="90,0" HasShadow="True" BorderColor="Transparent" BackgroundColor="Transparent">
+            <Image Source="icon" WidthRequest="160" HeightRequest="160"/>
+        </Frame>
+        <HorizontalStackLayout HorizontalOptions="Center" Margin="0,10">
+
+            <Label 
+                        VerticalOptions="Center"
+            Text="{Binding Name}" Margin="5,0"
+                FontAttributes="Bold"
+                FontSize="25"/>
+            <Label 
+                        VerticalOptions="Center"
+            Text="{Binding Surname}" 
+                FontAttributes="Bold"
+                FontSize="25"/>
+        </HorizontalStackLayout>
+        <Frame BackgroundColor="MediumSeaGreen" HasShadow="True">
+            <StackLayout>
+
+
+                <Frame Margin="10,5,10,5" Padding="10" BackgroundColor="MediumSeaGreen">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Name:       " Margin="0" FontAttributes="Bold" TextColor="White"/>
+                        <Label x:Name="Name" Text="{Binding Name}" TextColor="White"/>
+                    </StackLayout>
+                </Frame>
+                <Frame Margin="10,5" Padding="10" BackgroundColor="MediumSeaGreen">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Surname:  " Margin="0" FontAttributes="Bold" TextColor="White"/>
+                        <Label x:Name="Surname" Text="{Binding Surname}" TextColor="White"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame Margin="10,5" Padding="10" BackgroundColor="MediumSeaGreen">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Mail:           " FontAttributes="Bold" Margin="0" TextColor="White"/>
+                        <Label x:Name="Mail" Text="{Binding Mail}" TextColor="White"/>
+                    </StackLayout>
+                </Frame>
+                <Frame Margin="10,5" Padding="10" BackgroundColor="MediumSeaGreen">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Telefon:      "  FontAttributes="Bold" Margin="0,0" TextColor="White"/>
+                        <Label x:Name="Telefon" Text="{Binding Telefon}" TextColor="White"/>
+                    </StackLayout>
+                </Frame>
+                <!--<Button 
+                    Text="Edit Now" BackgroundColor="AliceBlue" TextColor="Black" Margin="10,10"/>-->
+            </StackLayout>
+        </Frame>
+    </VerticalStackLayout>
+</ContentPage>
