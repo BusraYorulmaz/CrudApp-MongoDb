@@ -7,12 +7,11 @@
     <VerticalStackLayout VerticalOptions="Start" Spacing="0" Margin="20,50">
 
         <Frame CornerRadius="130" Padding="10" Margin="90,0" HasShadow="True" BorderColor="Transparent" BackgroundColor="Transparent">
-            <Image Source="icon" WidthRequest="160" HeightRequest="160"/>
+            <Image Source="images" WidthRequest="160" HeightRequest="160"/>
         </Frame>
-        <HorizontalStackLayout HorizontalOptions="Center" Margin="0,10">
+        <HorizontalStackLayout HorizontalOptions="Center" Margin="0,0,0,40">
 
-            <Label 
-                        VerticalOptions="Center"
+            <Label VerticalOptions="Center"
             Text="{Binding Name}" Margin="5,0"
                 FontAttributes="Bold"
                 FontSize="25"/>

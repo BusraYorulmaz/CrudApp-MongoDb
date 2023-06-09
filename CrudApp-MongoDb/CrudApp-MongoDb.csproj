@@ -50,6 +50,7 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\icon.png" />
+	  <None Remove="Resources\Images\images.jpg" />
 	  <None Remove="Resources\Images\mangodb.png" />
 	</ItemGroup>
 
