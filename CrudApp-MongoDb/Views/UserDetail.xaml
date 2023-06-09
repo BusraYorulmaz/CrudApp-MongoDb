@@ -5,26 +5,21 @@
              Title="User Profile"
              BackgroundColor="AliceBlue">
     <VerticalStackLayout VerticalOptions="Start" Spacing="0" Margin="20,50">
-
-        <Frame CornerRadius="130" Padding="10" Margin="90,0" HasShadow="True" BorderColor="Transparent" BackgroundColor="Transparent">
-            <Image Source="images" WidthRequest="160" HeightRequest="160"/>
-        </Frame>
-        <HorizontalStackLayout HorizontalOptions="Center" Margin="0,0,0,40">
-
+        <HorizontalStackLayout HorizontalOptions="Center" Margin="0,0,0,30">
+            <Frame CornerRadius="50" Padding="10" Margin="10,0" HasShadow="True" BorderColor="Transparent" BackgroundColor="White">
+                <Image Source="images" WidthRequest="70" HeightRequest="70"/>
+            </Frame>
             <Label VerticalOptions="Center"
-            Text="{Binding Name}" Margin="5,0"
-                FontAttributes="Bold"
-                FontSize="25"/>
-            <Label 
-                        VerticalOptions="Center"
-            Text="{Binding Surname}" 
-                FontAttributes="Bold"
-                FontSize="25"/>
+                   Text="{Binding Name}" Margin="5,0"
+                   FontAttributes="Bold"
+                   FontSize="25"/>
+            <Label VerticalOptions="Center"
+                   Text="{Binding Surname}" 
+                   FontAttributes="Bold"
+                   FontSize="25"/>
         </HorizontalStackLayout>
         <Frame BackgroundColor="MediumSeaGreen" HasShadow="True">
             <StackLayout>
-
-
                 <Frame Margin="10,5,10,5" Padding="10" BackgroundColor="MediumSeaGreen">
                     <StackLayout Orientation="Horizontal">
                         <Label Text="Name:       " Margin="0" FontAttributes="Bold" TextColor="White"/>
